@@ -1,0 +1,19 @@
+{
+  "name": "filmix_movie_bot",
+  "version": "1.0.0",
+  "description": "A telegram movie bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "dotenv": "^18.0.8",
+    "fs": "^0.0.1-security",
+    "mongoose": "^9.11.2",
+    "node-telegram-bot-api": "^0.67.0",
+    "path": "^0.12.7"
+  }
+}
