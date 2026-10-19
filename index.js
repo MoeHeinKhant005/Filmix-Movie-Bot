@@ -78,28 +78,44 @@ bot.on('message', msg => {
 bot.onText(/^\/start(?:\s+(.+))?$/, async (msg, match) => {
     const movieId = match[1];
     const movieData = loadMovieData();
-    
-    // Select a movie with its ID
-    const selectedMovie = movieData[movieId];
 
-    // Creating a new movie caption
-    const caption = `<b>${selectedMovie.title} (${selectedMovie.releaseDate})</b>\n\n🎞 Filmix - Movie Channel တွင်လည်းအခြားသောစိတ်ဝင်စားဖွယ် Movie နှင့် Series များစွာကိုဝင်ရောက်ကြည့်ရှုနိုင်ပါပြီခင်ဗျာ။\n\n🗑 The content shared on this channel may be owned by third-party copyright holders. All rights remain with their respective owners.`
-    
-    // Sending the user with the movie
-    bot.sendVideo(msg.chat.id, selectedMovie.file_id, {
-        caption: caption,
-        parse_mode: "HTML",
-        reply_markup: {
-            inline_keyboard: [
-                [
-                    { 
-                        text: "🎬 Channel သို့သွားမည်",
-                        url: "https://t.me/filmix_movie06",
-                    }
+    if(!movieId){
+        // If there is no movie ID in the query
+        bot.sendMessage(msg.chat.id, "👋 မင်္ဂလာပါခင်ဗျာ။ Filmix - Movie Vault မှကြုိဆိုပါတယ်။\n\n📺 ရုပ်ရှင်များကြည့်ရန် Channel မှသက်ဆိုင်ရာခလုတ်များအားနှိပ်ပေးပါခင်ဗျာ။", {
+            reply_markup: {
+                inline_keyboard: [
+                    [
+                        { 
+                            text: "🎬 Channel သို့သွားမည်",
+                            url: "https://t.me/filmix_movie06",
+                        }
+                    ]
                 ]
-            ]
-        }
-    });
+            }
+        })
+    }else{
+        // Select a movie with its ID
+        const selectedMovie = movieData[movieId];
+
+        // Creating a new movie caption
+        const caption = `<b>${selectedMovie.title} (${selectedMovie.releaseDate})</b>\n\n🎞 Filmix - Movie Channel တွင်လည်းအခြားသောစိတ်ဝင်စားဖွယ် Movie နှင့် Series များစွာကိုဝင်ရောက်ကြည့်ရှုနိုင်ပါပြီခင်ဗျာ။\n\n🗑 The content shared on this channel may be owned by third-party copyright holders. All rights remain with their respective owners.`
+        
+        // Sending the user with the movie
+        bot.sendVideo(msg.chat.id, selectedMovie.file_id, {
+            caption: caption,
+            parse_mode: "HTML",
+            reply_markup: {
+                inline_keyboard: [
+                    [
+                        { 
+                            text: "🎬 Channel သို့သွားမည်",
+                            url: "https://t.me/filmix_movie06",
+                        }
+                    ]
+                ]
+            }
+        });
+    }
 })
 
 bot.on("polling_error", error => {
